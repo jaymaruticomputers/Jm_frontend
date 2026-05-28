@@ -51,6 +51,16 @@ export default function Nav() {
           </div>
         </div>
         <div className="mn-item">
+          <a href="/products" className="mn-link">Networking <i className="fa-solid fa-chevron-down"></i></a>
+          <div className="mn-panel">
+            <a href="/wifi-adapter">WiFi Adapter</a>
+            <a href="/network-switch">Network Switch</a>
+            <a href="/router">Router</a>
+            <a href="/lan-card">LAN Card</a>
+            <a href="/docking-station">Docking Station</a>
+          </div>
+        </div>
+        <div className="mn-item">
           <a href="/builds" className="mn-link">PC Builds <i className="fa-solid fa-chevron-down"></i></a>
           <div className="mn-panel mn-panel-2">
             <a href="/streaming-pc">Gaming &amp; Streaming PC</a>

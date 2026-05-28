@@ -39,6 +39,16 @@ export default function MobileMenu() {
         </div>
       </details>
       <details className="mm-group">
+        <summary>Networking</summary>
+        <div className="mm-sub">
+          <a href="/wifi-adapter">WiFi Adapter</a>
+          <a href="/network-switch">Network Switch</a>
+          <a href="/router">Router</a>
+          <a href="/lan-card">LAN Card</a>
+          <a href="/docking-station">Docking Station</a>
+        </div>
+      </details>
+      <details className="mm-group">
         <summary>PC Builds</summary>
         <div className="mm-sub">
           <a href="/streaming-pc">Gaming &amp; Streaming PC</a>

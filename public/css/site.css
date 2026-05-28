@@ -1973,7 +1973,52 @@ p{margin:0 0 12px;color:var(--text-2)}
 .howuse{padding:50px 0;background:var(--bg);text-align:center}
 .howuse .pill{margin-bottom:18px}
 .howuse h2{margin-bottom:18px;max-width:640px;margin-left:auto;margin-right:auto}
-.rating-inline{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);margin-bottom:50px}
+.rating-inline{display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);margin-bottom:50px;flex-wrap:wrap;justify-content:center}
+.rating-inline b{color:var(--text,#111);font-weight:700}
+.rating-inline .stars{color:#f5b301;letter-spacing:2px;font-size:15px}
+
+/* Trustindex widget — compact, no frame */
+#trustindex-mount{
+  max-width:880px;
+  margin:0 auto;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+  overflow:visible;
+  font-size:13px;
+}
+#trustindex-mount .ti-widget{margin:0 !important;font-size:13px !important}
+#trustindex-mount .ti-widget-container{padding:0 !important;background:transparent !important}
+/* Hide the summary header bar (Google · Excellent · X reviews · Write a review) */
+#trustindex-mount .ti-header,
+#trustindex-mount .ti-widget-container > .ti-header,
+#trustindex-mount .ti-rating-text,
+#trustindex-mount .ti-footer-write-review,
+#trustindex-mount .ti-write-review,
+#trustindex-mount .ti-header-bar,
+#trustindex-mount .ti-summary{display:none !important}
+#trustindex-mount .ti-review-item,
+#trustindex-mount .ti-review-card{
+  border-radius:12px !important;
+  box-shadow:0 3px 10px rgba(0,0,0,0.05) !important;
+  padding:12px !important;
+  font-size:12.5px !important;
+}
+#trustindex-mount .ti-name{font-size:13px !important}
+#trustindex-mount .ti-date{font-size:11px !important}
+#trustindex-mount .ti-review-content,
+#trustindex-mount .ti-review-text{font-size:12.5px !important;line-height:1.45 !important}
+#trustindex-mount .ti-stars,
+#trustindex-mount .ti-star{font-size:13px !important}
+#trustindex-mount .ti-profile-image,
+#trustindex-mount .ti-avatar{width:34px !important;height:34px !important}
+#trustindex-mount .ti-controls .ti-nav-button,
+#trustindex-mount .ti-arrow{width:28px !important;height:28px !important}
+@media (max-width:640px){
+  #trustindex-mount{padding:12px 8px;border-radius:16px;font-size:12px}
+}
 
 .story-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;margin:0 auto 60px}
 .story{
