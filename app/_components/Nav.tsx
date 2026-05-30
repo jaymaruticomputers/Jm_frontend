@@ -67,14 +67,12 @@ export default function Nav() {
             <a href="/build-streaming-simulator">Streaming &amp; Simulator PC</a>
             <a href="/build-music-production">Music Production PCs</a>
             <a href="/build-video-editing">Video Editing PC</a>
-            <a href="/build-layout-3d">Layout &amp; 3D Generalist PC</a>
             <a href="/build-game-dev">Game Development PC</a>
             <a href="/build-architectural">Architectural PC</a>
             <a href="/build-3d-modelling">3D Modelling PC</a>
             <a href="/build-vfx">VFX Animation PC</a>
             <a href="/build-compositing">Compositing PC</a>
             <a href="/build-graphic-design">Graphic Designing PCs</a>
-            <a href="/build-corporate">Corporate Use Case</a>
           </div>
         </div>
         <div className="mn-item mn-right">
