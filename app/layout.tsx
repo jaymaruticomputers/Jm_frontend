@@ -1,10 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 import Nav from "./_components/Nav";
 import MobileMenu from "./_components/MobileMenu";
 import Footer from "./_components/Footer";
 import WhatsAppFab from "./_components/WhatsAppFab";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "JM COMPUTERS — Custom RTX Gaming PCs, Laptops & Repair in Pune",
@@ -29,7 +35,7 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           referrerPolicy="no-referrer"
         />
-        <link rel="stylesheet" href="/css/site.css" />
+        <link rel="stylesheet" href="/css/site.css?v=20260530-8" />
       </head>
       <body>
         <Nav />

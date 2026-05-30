@@ -3762,3 +3762,105 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
   .page-hero::before,.page-hero::after{animation:none!important}
 }
 
+
+/* ===== Mobile fix: card carousels - show full text + fit cards to screen ===== */
+@media (max-width:600px){
+  .build-rail{gap:14px;align-items:stretch;overflow-y:visible}
+  .build-card{
+    width:84vw !important;max-width:320px !important;
+    height:auto !important;min-height:0 !important;
+  }
+  .build-card .build-img{height:172px !important}
+  .build-card .build-body{padding:16px 16px 18px;display:flex;flex-direction:column}
+  .build-card .build-body h3{font-size:14px;margin:0 0 7px}
+  .build-card .build-body p{
+    display:block !important;
+    -webkit-line-clamp:unset !important;line-clamp:unset !important;
+    -webkit-box-orient:initial !important;
+    overflow:visible !important;
+    font-size:13px !important;line-height:1.55 !important;
+    color:rgba(255,255,255,0.82);
+    margin:0 0 14px;
+  }
+  .build-card .build-cta{margin-top:auto}
+}
+
+/* ===== Mobile fix: rtx-card (graphics cards) - full text + fit to screen ===== */
+@media (max-width:600px){
+  .rtx-card{
+    width:84vw !important;max-width:320px !important;
+    height:auto !important;min-height:0 !important;
+  }
+  .rtx-img{height:210px !important}
+  .rtx-body{padding:16px 18px 18px;display:flex;flex-direction:column}
+  .rtx-body h3{font-size:16px;min-height:0 !important;margin:0 0 7px}
+  .rtx-body p{
+    display:block !important;
+    -webkit-line-clamp:unset !important;line-clamp:unset !important;
+    -webkit-box-orient:initial !important;
+    overflow:visible !important;
+    font-size:13px !important;line-height:1.55 !important;
+    color:rgba(255,255,255,0.82);margin:0 0 14px;flex:0 0 auto !important;
+  }
+  .rtx-cta{margin-top:auto}
+}
+
+/* ===== Mobile fix: remove hero bottom gap below the marquee ===== */
+@media (max-width:880px){
+  .hero{padding:110px 0 0 !important}        /* kill the 80px black gap under the marquee */
+  .hero-inner{padding-bottom:34px !important}
+  .hero-marquee{margin-top:0}
+}
+
+/* ===== Mobile fix: footer layout - stack columns, no overflow ===== */
+@media (max-width:780px){
+  footer{padding:48px 0 26px}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:28px 22px;margin-bottom:32px}
+  .foot-grid > div:first-child{grid-column:1 / -1;max-width:none}
+  .foot-grid p{max-width:none}
+  .sub-row{max-width:420px}
+  .foot-bot{flex-direction:column;align-items:flex-start;gap:14px;text-align:left}
+}
+@media (max-width:480px){
+  .foot-grid{grid-template-columns:1fr;gap:26px}
+}
+
+/* ===== Footer: logo alignment + non-clickable service labels ===== */
+.foot-grid .brand-pill{
+  width:auto !important;justify-content:flex-start !important;
+  gap:12px !important;align-items:center;height:auto;
+}
+.foot-grid .brand-pill .brand-name,
+.foot-grid .brand-pill span{
+  font-size:16px;font-weight:800;color:var(--text);
+}
+.foot-grid .foot-static{
+  display:block;font-size:14px;color:var(--muted);
+  padding:5px 0;cursor:default;
+}
+
+/* ===== Mobile fix: one card per view in carousels (no peeking) ===== */
+@media (max-width:600px){
+  .scroll-row{padding:0 18px}
+  .scroll-track{gap:16px;scroll-padding:0 18px;scroll-snap-type:x mandatory}
+  .scroll-track > *{scroll-snap-align:center}
+  .rtx-card,
+  .build-card{
+    width:calc(100vw - 36px) !important;
+    max-width:none !important;
+    flex:0 0 calc(100vw - 36px) !important;
+  }
+}
+
+/* ===== Mobile menu: scrollable sub-category dropdown ===== */
+.mobile-menu .mm-group[open] .mm-sub{
+  max-height:46vh;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+}
+.mobile-menu .mm-group[open] .mm-sub::-webkit-scrollbar{width:5px}
+.mobile-menu .mm-group[open] .mm-sub::-webkit-scrollbar-thumb{
+  background:rgba(255,255,255,0.25);border-radius:999px;
+}

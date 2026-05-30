@@ -459,3 +459,41 @@ if(matchMedia('(hover:hover)').matches){
   });
 })();
 
+
+
+/* ---------- Mega-nav: click opens the dropdown instead of navigating ---------- */
+(()=>{
+  const items = document.querySelectorAll('.mega-nav .mn-item');
+  if(!items.length) return;
+  const closeAll = (except)=> items.forEach(it=>{ if(it!==except) it.classList.remove('open'); });
+  items.forEach(item=>{
+    const link = item.querySelector(':scope > .mn-link');
+    const panel = item.querySelector(':scope > .mn-panel');
+    if(!link || !panel) return;
+    link.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const willOpen = !item.classList.contains('open');
+      closeAll(item);
+      item.classList.toggle('open', willOpen);
+    });
+  });
+  // close when clicking outside the menu, or on Escape
+  document.addEventListener('click', (e)=>{ if(!e.target.closest('.mega-nav .mn-item')) closeAll(null); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeAll(null); });
+})();
+
+
+/* ---------- Hero video: ensure autoplay on mobile ---------- */
+(()=>{
+  const v = document.querySelector('.hero-video');
+  if(!v) return;
+  v.muted = true; v.setAttribute('muted','');
+  v.playsInline = true; v.setAttribute('playsinline','');
+  const tryPlay = ()=>{ const p = v.play(); if(p && p.catch) p.catch(()=>{}); };
+  tryPlay();
+  v.addEventListener('loadeddata', tryPlay, { once:true });
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) tryPlay(); });
+  const once = ()=>{ tryPlay(); window.removeEventListener('touchstart', once); window.removeEventListener('click', once); };
+  window.addEventListener('touchstart', once, { passive:true });
+  window.addEventListener('click', once);
+})();
