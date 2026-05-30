@@ -13,9 +13,13 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.jmcomputer.in"),
   title: "JM COMPUTERS — Custom RTX Gaming PCs, Laptops & Repair in Pune",
   description:
     "JM COMPUTERS, Sadashiv Peth Pune — Custom RTX Gaming PC Builds, laptop sales, SSD/RAM upgrades, chip-level repair, AMC, data recovery, CCTV & networking. 18+ years experience. Mon–Sun 10 AM–8 PM.",
+  verification: {
+    google: "FTlsgKcvr69U8wHaBQuaojY9CyHH_tYwFEFol1MQp1g",
+  },
 };
 
 export default function RootLayout({
