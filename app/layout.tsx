@@ -39,7 +39,7 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           referrerPolicy="no-referrer"
         />
-        <link rel="stylesheet" href="/css/site.css?v=20260530-8" />
+        <link rel="stylesheet" href="/css/site.css?v=20260531-5" />
       </head>
       <body>
         <Nav />
@@ -47,7 +47,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppFab />
-        <Script src="/js/products.js" strategy="afterInteractive" />
+        <Script src="/js/products.js?v=20260531-2" strategy="afterInteractive" />
         <Script src="/js/site.js" strategy="afterInteractive" />
       </body>
     </html>

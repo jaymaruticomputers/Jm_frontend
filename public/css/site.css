@@ -2027,6 +2027,29 @@ p{margin:0 0 12px;color:var(--text-2)}
 @media (max-width:640px){
   #trustindex-mount{padding:12px 8px;border-radius:16px;font-size:12px}
 }
+/* Center the Google rating badge / review widget (was left-aligned).
+   The visible badge is the widget HEADER (.ti-widget-header). */
+#trustindex-mount{text-align:center}
+#trustindex-mount > *,
+#trustindex-mount .ti-widget,
+#trustindex-mount .ti-widget-container{
+  margin-left:auto !important;margin-right:auto !important;
+  float:none !important;max-width:100% !important;width:100% !important;
+}
+#trustindex-mount .ti-widget-header,
+#trustindex-mount .ti-widget-header > *,
+#trustindex-mount .ti-header,
+#trustindex-mount .ti-header > *,
+#trustindex-mount .ti-rating-wrapper,
+#trustindex-mount .ti-rating-text,
+#trustindex-mount .ti-stars,
+#trustindex-mount .ti-footer{
+  justify-content:center !important;
+  align-items:center !important;
+  text-align:center !important;
+  margin-left:auto !important;margin-right:auto !important;
+  float:none !important;
+}
 
 .story-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:980px;margin:0 auto 60px}
 .story{
@@ -3852,15 +3875,114 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
   }
 }
 
-/* ===== Mobile menu: scrollable sub-category dropdown ===== */
-.mobile-menu .mm-group[open] .mm-sub{
-  max-height:46vh;
-  overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
+/* ===== Mobile menu: the WHOLE drawer scrolls; sub-lists expand inline =====
+   Previously each open sub-list had its own 46vh inner scroll, and the flex
+   children could shrink — so an opened group overlapped the items below and
+   the inner list felt "stuck". Now: one scroll container (the drawer), items
+   never compress, sub-lists just push the rest of the menu down. */
+.mobile-menu{
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
   scrollbar-width:thin;
+  padding-bottom:max(72px,env(safe-area-inset-bottom));
 }
-.mobile-menu .mm-group[open] .mm-sub::-webkit-scrollbar{width:5px}
-.mobile-menu .mm-group[open] .mm-sub::-webkit-scrollbar-thumb{
+.mobile-menu > *,
+.mobile-menu .mm-group{flex-shrink:0}          /* don't squeeze → no overlap */
+.mobile-menu .mm-group[open] .mm-sub{
+  max-height:none;overflow:visible;            /* override old inner-scroll cap */
+}
+.mobile-menu::-webkit-scrollbar{width:5px}
+.mobile-menu::-webkit-scrollbar-thumb{
   background:rgba(255,255,255,0.25);border-radius:999px;
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE POLISH  (added 2026-05-31)
+   One consistent type/spacing scale for phones so every
+   section heading, sub-heading, button and card matches.
+   Appended last so it wins on equal specificity.
+============================================================ */
+
+/* ---------- Phones: ≤600px ---------- */
+@media (max-width:600px){
+  /* — Global type scale — */
+  h1{font-size:clamp(30px,8.4vw,40px);line-height:1.08;margin-bottom:14px}
+  h2{font-size:clamp(25px,6.6vw,32px);line-height:1.12;margin-bottom:12px}
+  h3{font-size:16.5px;line-height:1.3}
+  p{font-size:14.5px;line-height:1.6}
+  .lead{font-size:15px;line-height:1.6}
+
+  /* — Eyebrow pill — */
+  .pill{font-size:11.5px;padding:5px 12px;gap:6px}
+
+  /* — Buttons: consistent tap-friendly size — */
+  .btn{font-size:14px;padding:13px 20px;gap:8px}
+  .btn-light-pill{font-size:13px;padding:9px 15px}
+
+  /* — Section heading blocks: tighter, centered, even rhythm — */
+  .rtx-head,.cta-head,.builds-feature-head,.proc-head,.gal-head,
+  .show-head,.next-head,.work-head,.visit-head,.spec-head,.cat-head,
+  .shop-cat-head,.cat-carousel-head,.faq-head,.pkg-head{
+    margin-bottom:24px;
+  }
+
+  /* Every section HEADING the same size (override per-section custom sizes) */
+  .bigstat h2,.gal-head h2,.work-head h2,.visit-head h2,.spec-head h2,
+  .pkg-head h2,.cat-carousel-head h2{
+    font-size:clamp(25px,6.6vw,32px);line-height:1.12;
+  }
+
+  /* Every section SUB-HEADING the same size */
+  .rtx-head p,.cta-head p,.builds-feature-head p,.proc-head p,
+  .gal-head p,.show-head p,.next-head p,.work-head p,.visit-head p,
+  .spec-head p,.shop-cat-head p,.cat-carousel-head p,.faq-head p,
+  .pkg-head p,.cat-head .lead,.bignum-foot{
+    font-size:14.5px;line-height:1.6;
+  }
+
+  /* — Section vertical rhythm: trim the large desktop paddings — */
+  .rtx-series,.builds-feature,.shop-cat-sec,.proc-sec,.gal-sec,
+  .show-sec,.bigstat,.howuse,.faq-sec,.cta-sec,.next-sec,.story-sec,
+  .proc-deep,.spec-sec,.quote-sec,.work-sec,.visit-sec,.cat-sec,
+  .cat-carousel{
+    padding-top:44px;padding-bottom:44px;
+  }
+  .bigstat{padding-top:54px;padding-bottom:40px}
+
+  /* — Card text: keep titles/copy in proportion on small screens — */
+  .rtx-card h3{font-size:18px}
+  .rtx-card .sub{font-size:12.5px}
+  .next-card h3{font-size:16.5px}
+  .next-card p{font-size:13px}
+  .value-card h3,.spec-card h3,.why-card h3,.proc-step h3{font-size:16.5px}
+  .shop-cat-name{font-size:12.5px}
+  .testi p{font-size:14.5px}
+  .testi .who b{font-size:14px}
+
+  /* — Big-stat row: even 3-up instead of sprawling 80px gaps — */
+  .bs-stats{gap:18px 14px;padding-top:30px;margin-top:36px}
+  .bs-stat{flex:1 1 0;min-width:88px}
+  .bs-stat .num{font-size:32px}
+  .bs-stat .lbl{font-size:11.5px;max-width:none}
+  .bignum{font-size:clamp(72px,22vw,120px);margin-bottom:16px}
+
+  /* — Hero CTAs: stack full-width & centered so they stay clean
+       pills (not squeezed circles) and line up the same width — */
+  .hero-cta{
+    flex-direction:column;align-items:stretch;
+    gap:10px;width:100%;max-width:340px;
+    margin-left:auto;margin-right:auto;
+  }
+  .hero-cta .btn{width:100%;justify-content:center;white-space:nowrap}
+}
+
+/* ---------- Small phones: ≤400px ---------- */
+@media (max-width:400px){
+  h2,
+  .bigstat h2,.gal-head h2,.work-head h2,.visit-head h2,.spec-head h2,
+  .pkg-head h2,.cat-carousel-head h2{font-size:23px}
+  h3{font-size:15.5px}
+  .pill{font-size:11px}
+  .btn{font-size:13.5px;padding:12px 16px}
+  .hero-cta{max-width:none}
 }
