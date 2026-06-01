@@ -1476,7 +1476,7 @@ p{margin:0 0 12px;color:var(--text-2)}
 .shop-cat-card:hover::after{opacity:1;transform:translateX(0)}
 .shop-cat-img{
   width:100%;aspect-ratio:1/1;
-  background:#F4F4F4 center/contain no-repeat;
+  background:#F4F4F4 center/cover no-repeat;
   flex-shrink:0;
   position:relative;
 }
@@ -2258,23 +2258,10 @@ p{margin:0 0 12px;color:var(--text-2)}
   background:#0E0E0E url('/images/shop.jpeg') center/cover;
   box-shadow:0 18px 50px rgba(0,0,0,0.14);
 }
-.visit-hero::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(180deg, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.85) 100%);
-}
-.visit-hero .vh-content{
-  position:absolute;left:0;right:0;bottom:0;padding:30px;color:#fff;z-index:2;
-}
-.visit-hero .vh-content h3{color:#fff;font-size:24px;margin-bottom:8px;letter-spacing:-0.02em}
-.visit-hero .vh-content p{color:rgba(255,255,255,0.78);font-size:14px;margin:0}
-.visit-hero .vh-badge{
-  position:absolute;top:24px;left:24px;z-index:2;
-  background:rgba(0,0,0,0.95);color:#fff;
-  font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;
-  padding:7px 14px;border-radius:999px;
-  display:inline-flex;align-items:center;gap:6px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.4);
-}
+/* Text-free shop showcase: only the shop photo, no overlays/badge/heading */
+.visit-hero::after{display:none}
+.visit-hero .vh-content{display:none}
+.visit-hero .vh-badge{display:none}
 .visit-actions{
   display:grid;grid-template-columns:1fr 1fr;gap:14px;
 }
@@ -3261,6 +3248,14 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
 }
 @media(max-width:980px){.visit-grid{grid-template-columns:1fr}}
 
+/* Shop showcase image: responsive height on tablets/phones */
+@media(max-width:980px){
+  .visit-hero{flex:none;min-height:0;aspect-ratio:4/3;background-position:center}
+}
+@media(max-width:600px){
+  .visit-hero{aspect-ratio:1/1;border-radius:22px}
+}
+
 /* LEFT: map card */
 .v-map{
   position:relative;background:#fff;border:1px solid var(--line);
@@ -3791,7 +3786,7 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
     width:84vw !important;max-width:320px !important;
     height:auto !important;min-height:0 !important;
   }
-  .build-card .build-img{height:172px !important}
+  .build-card .build-img{height:230px !important}
   .build-card .build-body{padding:16px 16px 18px;display:flex;flex-direction:column}
   .build-card .build-body h3{font-size:14px;margin:0 0 7px}
   .build-card .build-body p{
@@ -3812,7 +3807,7 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
     width:84vw !important;max-width:320px !important;
     height:auto !important;min-height:0 !important;
   }
-  .rtx-img{height:210px !important}
+  .rtx-img{height:260px !important}
   .rtx-body{padding:16px 18px 18px;display:flex;flex-direction:column}
   .rtx-body h3{font-size:16px;min-height:0 !important;margin:0 0 7px}
   .rtx-body p{
@@ -4089,15 +4084,15 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
 }
 
 /* ============================================================
-   MOBILE HERO: poster image instead of <video>  (2026-06-01)
-   On phones, browsers (iOS Low Power Mode, Android data-saver)
-   block video autoplay and force a native "tap to play" overlay
-   that CSS can't reliably hide. So on mobile we drop the video
-   element entirely and use its poster frame as a static hero
-   background — no video element means no play button, ever.
+   MOBILE HERO: show the autoplaying <video>, hide play button (2026-06-01)
+   The video already carries autoplay/muted/loop/playsinline, which
+   lets it autoplay inline on mobile. The native "tap to play" /
+   media-controls overlay is suppressed via the ::-webkit-media-controls*
+   rules above. The poster frame is used as a fallback background while
+   the video loads (or if autoplay is blocked) so there is never a gap.
 ============================================================ */
 @media (max-width:768px){
-  .hero-video{display:none !important}
+  .hero-video{display:block !important}
   .hero{
     background:#000 url('https://jmcomputerweb.vercel.app/images/rtx/rtx-system-2.jpg') center center / cover no-repeat;
   }
