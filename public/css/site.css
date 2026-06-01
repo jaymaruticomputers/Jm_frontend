@@ -374,6 +374,9 @@ p{margin:0 0 12px;color:var(--text-2)}
 }
 /* Hide the native mobile/iOS "start playback" play-button overlay on the hero video */
 .hero-video::-webkit-media-controls{display:none!important;-webkit-appearance:none}
+.hero-video::-webkit-media-controls-enclosure{display:none!important;-webkit-appearance:none}
+.hero-video::-webkit-media-controls-panel{display:none!important;-webkit-appearance:none}
+.hero-video::-webkit-media-controls-overlay-play-button{display:none!important;-webkit-appearance:none}
 .hero-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
 .hero-video::-webkit-media-controls-play-button{display:none!important;-webkit-appearance:none}
 .hero-inner{
