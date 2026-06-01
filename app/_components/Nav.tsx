@@ -16,6 +16,21 @@ export default function Nav() {
       <nav className="center-pill mega-nav">
         <a href="/" className="mn-link">Home</a>
         <div className="mn-item">
+          <a href="/builds" className="mn-link">PC Builds <i className="fa-solid fa-chevron-down"></i></a>
+          <div className="mn-panel mn-panel-2">
+            <a href="/streaming-pc">Gaming &amp; Streaming PC</a>
+            <a href="/build-streaming-simulator">Streaming &amp; Simulator PC</a>
+            <a href="/build-music-production">Music Production PCs</a>
+            <a href="/build-video-editing">Video Editing PC</a>
+            <a href="/build-game-dev">Game Development PC</a>
+            <a href="/build-architectural">Architectural PC</a>
+            <a href="/build-3d-modelling">3D Modelling PC</a>
+            <a href="/build-vfx">VFX Animation PC</a>
+            <a href="/build-compositing">Compositing PC</a>
+            <a href="/build-graphic-design">Graphic Designing PCs</a>
+          </div>
+        </div>
+        <div className="mn-item">
           <a href="/products" className="mn-link">Gaming <i className="fa-solid fa-chevron-down"></i></a>
           <div className="mn-panel">
             <a href="/gaming-mouse">Gaming Mouse</a>
@@ -58,21 +73,6 @@ export default function Nav() {
             <a href="/router">Router</a>
             <a href="/lan-card">LAN Card</a>
             <a href="/docking-station">Docking Station</a>
-          </div>
-        </div>
-        <div className="mn-item">
-          <a href="/builds" className="mn-link">PC Builds <i className="fa-solid fa-chevron-down"></i></a>
-          <div className="mn-panel mn-panel-2">
-            <a href="/streaming-pc">Gaming &amp; Streaming PC</a>
-            <a href="/build-streaming-simulator">Streaming &amp; Simulator PC</a>
-            <a href="/build-music-production">Music Production PCs</a>
-            <a href="/build-video-editing">Video Editing PC</a>
-            <a href="/build-game-dev">Game Development PC</a>
-            <a href="/build-architectural">Architectural PC</a>
-            <a href="/build-3d-modelling">3D Modelling PC</a>
-            <a href="/build-vfx">VFX Animation PC</a>
-            <a href="/build-compositing">Compositing PC</a>
-            <a href="/build-graphic-design">Graphic Designing PCs</a>
           </div>
         </div>
         <div className="mn-item mn-right">

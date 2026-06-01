@@ -2255,7 +2255,7 @@ p{margin:0 0 12px;color:var(--text-2)}
 .visit-side{display:flex;flex-direction:column;gap:18px}
 .visit-hero{
   position:relative;border-radius:28px;overflow:hidden;flex:1;min-height:240px;
-  background:#0E0E0E url('https://jmcomputerweb.vercel.app/images/rtx/rtx-system-3.jpg') center/cover;
+  background:#0E0E0E url('/images/shop.jpeg') center/cover;
   box-shadow:0 18px 50px rgba(0,0,0,0.14);
 }
 .visit-hero::after{
@@ -2291,7 +2291,7 @@ p{margin:0 0 12px;color:var(--text-2)}
 }
 .visit-action.wa .ic{background:#25D366;box-shadow:0 6px 14px rgba(37,211,102,0.35)}
 .visit-action.call .ic{background:var(--dark);box-shadow:0 6px 14px rgba(0,0,0,0.3)}
-.visit-action.email .ic{background:linear-gradient(135deg,#222222,#000000);box-shadow:0 6px 14px rgba(0,0,0,0.35)}
+.visit-action.email .ic{background:#fff;border:1px solid var(--line);box-shadow:0 6px 14px rgba(0,0,0,0.10)}
 .visit-action.insta .ic{background:linear-gradient(135deg,#F58529,#DD2A7B,#8134AF);box-shadow:0 6px 14px rgba(221,42,123,0.35)}
 .visit-action b{display:block;font-size:14px;font-weight:700;color:var(--text);letter-spacing:-0.01em;line-height:1.2}
 .visit-action small{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
@@ -3007,12 +3007,6 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
 }
 .filter-chip:hover{background:var(--bg-card)}
 .filter-chip.active{background:var(--dark);color:#fff;border-color:var(--dark)}
-
-/* Hide voice agent floating note - small footer line */
-.voice-hint{
-  font-size:11px;color:var(--muted-2);text-align:center;
-  padding:8px 0 0;letter-spacing:0.04em;
-}
 
 /* ============================================
    GLOBAL TYPOGRAPHY OVERRIDE
@@ -4092,4 +4086,19 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
   .hero h1{font-size:clamp(36px,11vw,46px) !important}
   .hero .lead{font-size:14px}
   .hero-cta{max-width:none}
+}
+
+/* ============================================================
+   MOBILE HERO: poster image instead of <video>  (2026-06-01)
+   On phones, browsers (iOS Low Power Mode, Android data-saver)
+   block video autoplay and force a native "tap to play" overlay
+   that CSS can't reliably hide. So on mobile we drop the video
+   element entirely and use its poster frame as a static hero
+   background — no video element means no play button, ever.
+============================================================ */
+@media (max-width:768px){
+  .hero-video{display:none !important}
+  .hero{
+    background:#000 url('https://jmcomputerweb.vercel.app/images/rtx/rtx-system-2.jpg') center center / cover no-repeat;
+  }
 }
