@@ -40,7 +40,7 @@ export default function Footer() {
           </div>
           <div>
             <h4>Contact</h4>
-            <a href="tel:+918308310019"><i className="fa-solid fa-phone"></i> +91 83083 10019</a>
+            <a href="tel:+919166660201"><i className="fa-solid fa-phone"></i> +91 91666 60201</a>
             <a href="https://wa.me/919166660201"><i className="fa-brands fa-whatsapp"></i> WhatsApp us</a>
             <a href="mailto:jaymaruticomputers@gmail.com"><i className="fa-regular fa-envelope"></i> jaymaruticomputers@gmail.com</a>
             <a href="https://www.instagram.com/jm_computers2022" target="_blank" rel="noopener"><i className="fa-brands fa-instagram"></i> @jm_computers2022</a>
@@ -53,7 +53,7 @@ export default function Footer() {
             <a href="https://www.instagram.com/jm_computers2022" target="_blank" rel="noopener" title="Instagram"><i className="fa-brands fa-instagram"></i></a>
             <a href="https://wa.me/919166660201" target="_blank" rel="noopener" title="WhatsApp"><i className="fa-brands fa-whatsapp"></i></a>
             <a href="mailto:jaymaruticomputers@gmail.com" title="Email"><i className="fa-regular fa-envelope"></i></a>
-            <a href="tel:+918308310019" title="Call"><i className="fa-solid fa-phone"></i></a>
+            <a href="tel:+919166660201" title="Call"><i className="fa-solid fa-phone"></i></a>
           </div>
         </div>
       </div>

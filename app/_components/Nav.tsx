@@ -89,7 +89,7 @@ export default function Nav() {
         <a href="/gallery" className="mn-link">Gallery</a>
       </nav>
       <div className="icon-pill">
-        <a href="tel:+918308310019" title="Call"><i className="fa-solid fa-phone"></i></a>
+        <a href="https://www.instagram.com/jm_computers2022" target="_blank" rel="noopener" title="Instagram"><i className="fa-brands fa-instagram"></i></a>
         <a href="/contact" title="Visit"><i className="fa-solid fa-location-dot"></i></a>
         <button className="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
           <span className="bar"></span>

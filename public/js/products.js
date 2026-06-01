@@ -811,7 +811,7 @@
         const oosBadge = oos ? '<span class="oos">Out of stock</span>' : '';
         const cta = oos
           ? '<span class="cta disabled"><i class="fa-solid fa-ban"></i> Out of stock</span>'
-          : `<a class="cta" href="https://wa.me/918308310019?text=${encodeURIComponent('Hi JM COMPUTERS, I want to get in touch about the '+name+'.')}" target="_blank" rel="noopener"><i class="fa-solid fa-comment-dots"></i> Get in touch</a>`;
+          : `<a class="cta" href="https://wa.me/919166660201?text=${encodeURIComponent('Hi JM COMPUTERS, I want to get in touch about the '+name+'.')}" target="_blank" rel="noopener"><i class="fa-solid fa-comment-dots"></i> Get in touch</a>`;
         return `<article class="shop-card">
           <div class="img" style="background-image:url('${img}')">
             ${oosBadge}

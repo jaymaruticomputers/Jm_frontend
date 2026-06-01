@@ -372,6 +372,10 @@ p{margin:0 0 12px;color:var(--text-2)}
   transform:scale(1.04);
   filter:saturate(1.15) contrast(1.08);
 }
+/* Hide the native mobile/iOS "start playback" play-button overlay on the hero video */
+.hero-video::-webkit-media-controls{display:none!important;-webkit-appearance:none}
+.hero-video::-webkit-media-controls-start-playback-button{display:none!important;-webkit-appearance:none}
+.hero-video::-webkit-media-controls-play-button{display:none!important;-webkit-appearance:none}
 .hero-inner{
   position:relative;z-index:2;
   max-width:1040px;margin:0 auto;padding:0 28px 90px;
@@ -3984,5 +3988,108 @@ footer{padding:60px 0 32px;background:var(--bg);border-top:1px solid var(--line)
   h3{font-size:15.5px}
   .pill{font-size:11px}
   .btn{font-size:13.5px;padding:12px 16px}
+  .hero-cta{max-width:none}
+}
+
+/* ============================================================
+   MOBILE ALIGNMENT PASS  (added 2026-06-01)
+   Every home-page section shares ONE side-gutter and ONE
+   heading scale, so each section's heading lines up with the
+   cards/rows beneath it — and all sections line up with each
+   other — on phones. Appended last so it wins on equal
+   specificity. Scoped to phone widths only (desktop untouched).
+============================================================ */
+@media (max-width:600px){
+  /* — One shared 18px gutter: section heads AND their content rows —
+       (heads previously sat at 24px while rows used 16–18px, so the
+        heading text didn't line up with the cards under it). */
+  .rtx-head,.builds-feature-head,.cat-carousel-head,.shop-cat-head,
+  .faq-head,.cta-head,
+  .scroll-row,.shop-cat-grid,.faq-list,.cta-grid,
+  .howuse > .container,.bigstat > .container{
+    padding-left:18px !important;padding-right:18px !important;
+    max-width:none !important;
+  }
+  .shop-grid{padding-left:18px !important;padding-right:18px !important}
+
+  /* — Full-bleed carousel cards snap to the same 18px gutter — */
+  .scroll-track{scroll-padding-left:18px;scroll-padding-right:18px}
+  .rtx-card,.build-card{
+    width:calc(100vw - 36px) !important;
+    flex:0 0 calc(100vw - 36px) !important;
+    max-width:none !important;
+  }
+
+  /* — Every section heading: same size, centered, even rhythm — */
+  .rtx-head,.builds-feature-head,.cat-carousel-head,.shop-cat-head,
+  .faq-head,.cta-head{text-align:center;margin-left:auto;margin-right:auto;margin-bottom:22px}
+  .rtx-head h2,.builds-feature-head h2,.cat-carousel-head h2,
+  .shop-cat-head h2,.faq-head h2,.cta-head h2,.howuse h2,.bigstat h2{
+    font-size:clamp(24px,6.4vw,30px) !important;line-height:1.16;
+  }
+
+  /* — Every section sub-heading: same size — */
+  .rtx-head p,.builds-feature-head p,.cat-carousel-head p,
+  .shop-cat-head p,.faq-head p,.cta-head p{
+    font-size:14px !important;line-height:1.6;max-width:none !important;
+  }
+}
+
+@media (max-width:400px){
+  /* Tighter 16px gutter on small phones — still shared by every section */
+  .rtx-head,.builds-feature-head,.cat-carousel-head,.shop-cat-head,
+  .faq-head,.cta-head,
+  .scroll-row,.shop-grid,.shop-cat-grid,.faq-list,.cta-grid,
+  .howuse > .container,.bigstat > .container{
+    padding-left:16px !important;padding-right:16px !important;
+  }
+  .scroll-track{scroll-padding-left:16px;scroll-padding-right:16px}
+  .rtx-card,.build-card{
+    width:calc(100vw - 32px) !important;
+    flex:0 0 calc(100vw - 32px) !important;
+  }
+}
+
+/* ============================================================
+   MOBILE HERO PROPORTIONS  (added 2026-06-01)
+   On phones the hero heading read small while the CTA buttons,
+   badge and trust pill stayed desktop-sized (their multi-class
+   selectors out-specified the generic mobile shrink rules).
+   These match that specificity so the heading grows and the
+   chrome around it slims down. Phone widths only.
+============================================================ */
+@media (max-width:600px){
+  /* — Heading: larger & tighter so it dominates the hero — */
+  .hero h1{
+    font-size:clamp(40px,10.5vw,54px) !important;
+    line-height:1.02;letter-spacing:-0.03em;margin-bottom:18px;
+  }
+  .hero .lead{font-size:15px;line-height:1.58;margin-bottom:26px}
+
+  /* — Badge/pill: smaller & tighter — */
+  .hero .pill{
+    font-size:10.5px;padding:6px 7px 6px 13px;margin-bottom:20px;gap:8px;
+  }
+  .hero .pill .new{font-size:9px;padding:4px 8px}
+
+  /* — CTA buttons: slimmer (less tall), readable, full-width pills — */
+  .hero-cta{gap:10px;max-width:330px}
+  .hero-cta .btn-white,
+  .hero-cta .btn-ghost-dark{
+    padding:13px 22px !important;font-size:14px !important;
+    width:100%;justify-content:center;
+  }
+
+  /* — Trust / rating pill: compact — */
+  .hero-trust{
+    margin-top:26px;padding:10px 18px;gap:8px 14px;
+  }
+  .hero-trust .ht-stars{font-size:12px;letter-spacing:1.5px}
+  .hero-trust .ht-text{font-size:12px}
+}
+
+@media (max-width:400px){
+  .hero h1{font-size:clamp(36px,11vw,46px) !important}
+  .hero .lead{font-size:14px}
   .hero-cta{max-width:none}
 }
