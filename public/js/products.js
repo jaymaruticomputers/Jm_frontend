@@ -959,19 +959,23 @@
     if (grid.children.length) return;
     const cat = grid.dataset.category;
 
-    // Prefer the live, admin-editable data in /eh-data/<category>.json so
-    // changes made in the admin panel show up immediately.
-    try {
-      const res = await fetch('/eh-data/' + cat + '.json', { cache: 'no-store' });
-      if (res.ok){
-        const data = await res.json();
-        if (data && Array.isArray(data.items) && data.items.length){
-          const items = data.items.map(p => [p.name, p.price || 0, p.mrp || 0, 0, p.path || '', p.oos ? 1 : 0]);
-          fillGrid(grid, items, null);
-          return;
+    // Prefer the live, admin-editable data so changes made in the admin
+    // panel show up immediately. The /api/catalog endpoint serves the data
+    // from Blob (on Vercel) or the committed eh-data file (locally); fall
+    // back to the static file directly if the endpoint is unavailable.
+    for (const url of ['/api/catalog?category=' + encodeURIComponent(cat), '/eh-data/' + cat + '.json']) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok){
+          const data = await res.json();
+          if (data && Array.isArray(data.items) && data.items.length){
+            const items = data.items.map(p => [p.name, p.price || 0, p.mrp || 0, 0, p.path || '', p.oos ? 1 : 0]);
+            fillGrid(grid, items, null);
+            return;
+          }
         }
-      }
-    } catch (e) { /* fall back to the bundled catalog below */ }
+      } catch (e) { /* try the next source / bundled catalog below */ }
+    }
 
     // Fallback: bundled CATALOG (build-PC pages, monitor sub-pages, etc.)
     const data = CATALOG[cat];

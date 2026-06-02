@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
-import { isAuthed, isValidSlug, IMAGES_DIR } from "../../../_lib/admin";
+import { put } from "@vercel/blob";
+import { isAuthed, isValidSlug, IMAGES_DIR, useBlob } from "../../../_lib/admin";
 
 export const dynamic = "force-dynamic";
 
@@ -34,11 +35,24 @@ export async function POST(req: NextRequest) {
   const stamp = Date.now().toString(36);
   const filename = `${base}-${stamp}.${ext}`;
 
-  const dir = path.join(IMAGES_DIR, category);
-  await fs.mkdir(dir, { recursive: true });
   const buf = Buffer.from(await file.arrayBuffer());
   if (buf.length > 8 * 1024 * 1024)
     return NextResponse.json({ error: "File too large (max 8MB)" }, { status: 400 });
+
+  // On Vercel (read-only FS) store the image in Blob and return its public
+  // URL; locally write it under /public/eh-images and return the web path.
+  if (useBlob()) {
+    const { url } = await put(`eh-images/${category}/${filename}`, buf, {
+      access: "public",
+      contentType: file.type || undefined,
+      addRandomSuffix: false,
+      allowOverwrite: true,
+    });
+    return NextResponse.json({ ok: true, path: url });
+  }
+
+  const dir = path.join(IMAGES_DIR, category);
+  await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.join(dir, filename), buf);
 
   return NextResponse.json({ ok: true, path: `/eh-images/${category}/${filename}` });
