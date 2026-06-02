@@ -929,24 +929,14 @@
   function inr(n){ return n.toLocaleString('en-IN'); }
   function esc(s){ return String(s).replace(/[&<>"']/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 
-  function render(){
-    const grids = document.querySelectorAll('.shop-grid[data-category]');
-    grids.forEach(grid=>{
-      // Skip if author already inlined cards (e.g. gaming-mouse, gaming-keyboard)
-      if (grid.children.length) return;
-      const cat  = grid.dataset.category;
-      const data = CATALOG[cat];
-      if (!data) return;
-      const pool = POOLS[data.pool] || [];
-
-      const html = data.items.map(item=>{
-        const [name, price, mrp, disc, imgIdx, oos] = item;
-        const img = (typeof imgIdx === 'string') ? imgIdx : (pool[(imgIdx || 0) % pool.length] || '');
-        const oosBadge = oos ? '<span class="oos">Out of stock</span>' : '';
-        const cta = oos
-          ? '<span class="cta disabled"><i class="fa-solid fa-ban"></i> Out of stock</span>'
-          : `<a class="cta" href="https://wa.me/919166660201?text=${encodeURIComponent('Hi JM COMPUTERS, I want to get in touch about the '+name+'.')}" target="_blank" rel="noopener"><i class="fa-solid fa-comment-dots"></i> Get in touch</a>`;
-        return `<article class="shop-card">
+  function cardHTML(item, pool){
+    const [name, price, mrp, disc, imgIdx, oos] = item;
+    const img = (typeof imgIdx === 'string') ? imgIdx : ((pool && pool[(imgIdx || 0) % pool.length]) || '');
+    const oosBadge = oos ? '<span class="oos">Out of stock</span>' : '';
+    const cta = oos
+      ? '<span class="cta disabled"><i class="fa-solid fa-ban"></i> Out of stock</span>'
+      : `<a class="cta" href="https://wa.me/919166660201?text=${encodeURIComponent('Hi JM COMPUTERS, I want to get in touch about the '+name+'.')}" target="_blank" rel="noopener"><i class="fa-solid fa-comment-dots"></i> Get in touch</a>`;
+    return `<article class="shop-card">
           <div class="img" style="background-image:url('${img}')">
             ${oosBadge}
           </div>
@@ -955,15 +945,42 @@
             ${cta}
           </div>
         </article>`;
-      }).join('');
+  }
 
-      grid.innerHTML = html;
+  function fillGrid(grid, items, pool){
+    grid.innerHTML = items.map(it=>cardHTML(it, pool)).join('');
+    const section = grid.closest('.shop-sec');
+    const countEl = section && section.querySelector('.cat-count');
+    if (countEl) countEl.textContent = items.length + ' products';
+  }
 
-      // Update product count in the shop-sec toolbar
-      const section = grid.closest('.shop-sec');
-      const countEl = section && section.querySelector('.cat-count');
-      if (countEl) countEl.textContent = data.items.length + ' products';
-    });
+  async function renderGrid(grid){
+    // Skip if author already inlined cards (e.g. gaming-mouse, gaming-keyboard)
+    if (grid.children.length) return;
+    const cat = grid.dataset.category;
+
+    // Prefer the live, admin-editable data in /eh-data/<category>.json so
+    // changes made in the admin panel show up immediately.
+    try {
+      const res = await fetch('/eh-data/' + cat + '.json', { cache: 'no-store' });
+      if (res.ok){
+        const data = await res.json();
+        if (data && Array.isArray(data.items) && data.items.length){
+          const items = data.items.map(p => [p.name, p.price || 0, p.mrp || 0, 0, p.path || '', p.oos ? 1 : 0]);
+          fillGrid(grid, items, null);
+          return;
+        }
+      }
+    } catch (e) { /* fall back to the bundled catalog below */ }
+
+    // Fallback: bundled CATALOG (build-PC pages, monitor sub-pages, etc.)
+    const data = CATALOG[cat];
+    if (!data) return;
+    fillGrid(grid, data.items, POOLS[data.pool] || []);
+  }
+
+  function render(){
+    document.querySelectorAll('.shop-grid[data-category]').forEach(renderGrid);
   }
 
   if (document.readyState === 'loading') {

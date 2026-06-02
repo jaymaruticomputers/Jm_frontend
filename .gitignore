@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# admin runtime data (visit analytics log)
+/data/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -47,8 +47,11 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsAppFab />
-        <Script src="/js/products.js?v=20260531-2" strategy="afterInteractive" />
+        <Script src="/js/products.js?v=20260602-1" strategy="afterInteractive" />
         <Script src="/js/site.js?v=20260601-1" strategy="afterInteractive" />
+        <Script id="jm-track" strategy="afterInteractive">
+          {`try{var p=location.pathname;if(p.indexOf('/admin')!==0){var b=JSON.stringify({path:p});if(navigator.sendBeacon){navigator.sendBeacon('/api/track',b);}else{fetch('/api/track',{method:'POST',body:b,keepalive:true});}}}catch(e){}`}
+        </Script>
       </body>
     </html>
   );
