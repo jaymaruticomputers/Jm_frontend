@@ -51,6 +51,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, path: url });
   }
 
+  // Filesystem fallback only works on a writable disk (local dev / next
+  // start). On Vercel the FS is read-only, so refuse with a clear message
+  // instead of crashing with a cryptic ENOENT mkdir error.
+  if (process.env.VERCEL) {
+    return NextResponse.json(
+      { error: "Image storage not configured: Blob token missing on this deployment." },
+      { status: 500 },
+    );
+  }
+
   const dir = path.join(IMAGES_DIR, category);
   await fs.mkdir(dir, { recursive: true });
   await fs.writeFile(path.join(dir, filename), buf);
