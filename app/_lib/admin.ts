@@ -175,22 +175,48 @@ export function deviceType(ua: string): "Mobile" | "Tablet" | "Desktop" {
   return "Desktop";
 }
 
+// Blob pathname for the visit log. Tagged with a secret-derived suffix so
+// the public Blob URL is not trivially guessable.
+function visitsBlobPath(): string {
+  const tag = crypto.createHmac("sha256", SECRET).update("visits-file").digest("hex").slice(0, 16);
+  return `data/visits-${tag}.json`;
+}
+
 export async function recordVisit(v: Visit): Promise<void> {
-  await fs.mkdir(path.dirname(VISITS_FILE), { recursive: true });
-  let list: Visit[] = [];
-  try {
-    list = JSON.parse(await fs.readFile(VISITS_FILE, "utf8"));
-    if (!Array.isArray(list)) list = [];
-  } catch {
-    list = [];
-  }
+  let list = await readVisits();
   list.push(v);
   // keep the log bounded
   if (list.length > 20000) list = list.slice(-20000);
-  await fs.writeFile(VISITS_FILE, JSON.stringify(list), "utf8");
+  const json = JSON.stringify(list);
+
+  if (useBlob()) {
+    await put(visitsBlobPath(), json, {
+      access: "public",
+      contentType: "application/json",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      cacheControlMaxAge: 0,
+    });
+    return;
+  }
+
+  await fs.mkdir(path.dirname(VISITS_FILE), { recursive: true });
+  await fs.writeFile(VISITS_FILE, json, "utf8");
 }
 
 export async function readVisits(): Promise<Visit[]> {
+  if (useBlob()) {
+    try {
+      const url = await blobUrlFor(visitsBlobPath());
+      if (!url) return [];
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) return [];
+      const list = await res.json();
+      return Array.isArray(list) ? list : [];
+    } catch {
+      return [];
+    }
+  }
   try {
     const list = JSON.parse(await fs.readFile(VISITS_FILE, "utf8"));
     return Array.isArray(list) ? list : [];
