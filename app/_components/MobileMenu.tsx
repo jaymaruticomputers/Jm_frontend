@@ -33,6 +33,7 @@ export default function MobileMenu() {
           <a href="/amd-graphics-card">AMD Graphics Card</a>
           <a href="/ram">RAM</a>
           <a href="/storage">Computer Storage</a>
+          <a href="/external-ssd">External SSD / HDD</a>
           <a href="/cabinet">Cabinet</a>
           <a href="/cpu-cooler">CPU Cooler</a>
           <a href="/power-supply">Power Supply</a>
@@ -46,6 +47,7 @@ export default function MobileMenu() {
           <a href="/router">Router</a>
           <a href="/lan-card">LAN Card</a>
           <a href="/docking-station">Docking Station</a>
+          <a href="/converters">Converters &amp; Cables</a>
         </div>
       </details>
       <details className="mm-group">
