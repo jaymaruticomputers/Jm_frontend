@@ -1992,9 +1992,9 @@ p{margin:0 0 12px;color:var(--text-2)}
 .rating-inline b{color:var(--text,#111);font-weight:700}
 .rating-inline .stars{color:#f5b301;letter-spacing:2px;font-size:15px}
 
-/* Trustindex widget — compact, no frame */
+/* Google reviews widget — compact, no frame */
 #trustindex-mount{
-  max-width:880px;
+  max-width:1240px;
   margin:0 auto;
   background:transparent;
   border:0;
@@ -2034,6 +2034,13 @@ p{margin:0 0 12px;color:var(--text-2)}
 @media (max-width:640px){
   #trustindex-mount{padding:12px 8px;border-radius:16px;font-size:12px}
 }
+/* Hide Elfsight free-plan branding ("Free Google Reviews Widget") */
+.eapps-link,
+.eapps-widget-toolbar,
+.eapps-widget-toolbar-panel,
+[class*="WidgetToolbar"],
+[class*="eapps-link"],
+a[href*="elfsight.com"]{display:none !important}
 /* Center the Google rating badge / review widget (was left-aligned).
    The visible badge is the widget HEADER (.ti-widget-header). */
 #trustindex-mount{text-align:center}

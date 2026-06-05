@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import pages from "./_content/pages.json";
-import TrustindexWidget from "./_components/TrustindexWidget";
+import ElfsightWidget from "./_components/ElfsightWidget";
 
 const page = (pages as Record<string, { title: string; description: string; html: string }>)["index"];
 
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <main dangerouslySetInnerHTML={{ __html: page.html }} />
-      <TrustindexWidget widgetId="29d83d97256296810b067817911" targetId="trustindex-mount" />
+      <ElfsightWidget appId="90dc775a-cb05-4142-b129-fb23511f9096" targetId="trustindex-mount" />
     </>
   );
 }
